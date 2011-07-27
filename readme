@@ -1,0 +1,9 @@
+testClass.php 
+ --This is actually Thing class.Just give this name.
+
+Creativework.Php 
+ --This class inherits from Thing class.
+
+DBLayer.php 
+ -- This is generic database layer which is used by whole application.
+
