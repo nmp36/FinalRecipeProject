@@ -1,3 +1,8 @@
+--User interface from Index.php file is in progress.
+--For execution 
+Copy all classes to your local.Index.php file prompts you for recipe name.Please enter recipe name "First Recipe" then hit Search Recipe button.System will return you recipe matching search criteria.
+I am working on improving this code bit more.
+
 testClass.php 
  --This is actually Thing class.Just give this name.
 
