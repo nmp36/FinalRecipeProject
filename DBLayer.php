@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Description of DBLayer
  *This class is responsible for making DB Connection , create ,update ,delete or insert operations.
@@ -20,7 +18,10 @@ class DBLayer
     {
     $username = 'kwilliams';
     $password = 'mongo1234';
-    $conn = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
+    $conn =singleton::singleton($username,$password);
+    //echo $conn->increment();
+    //echo $conn->increment();
+    //new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
     $this->dbObj = $conn->recipe;
     }
     Function setCollectionObj($colName) 
@@ -80,6 +81,40 @@ class DBLayer
     $this->Collect->remove($criteria, true );
     }
     
+}
+class singleton
+{
+    private static $instance;
+    private $count = 0;
+    private function __construct()
+    {
+    }
+    public static function singleton($username,$password)
+    {
+    if (!(self::$instance)) {
+    echo 'Creating new instance.';
+    $className = __CLASS__;
+    self::$instance = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));;
+    }
+    else
+    {
+        echo 'Same instance';
+    }
+    return self::$instance;
+    }
+    public function increment()
+    {
+        return $this->count++;
+    }
+    public function __clone()
+    {
+    trigger_error('Clone is not allowed.', E_USER_ERROR);
+    }
+
+    public function __wakeup()
+    {
+    trigger_error('Unserializing is not allowed.', E_USER_ERROR);
+    }
 }
 
 ?>
