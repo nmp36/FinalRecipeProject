@@ -14,14 +14,13 @@ class DBLayer
     private $Collect;
     private $dbObj;
     private $Id;
+    private $abc;
+    
     function __construct()
     {
     $username = 'kwilliams';
     $password = 'mongo1234';
-    $conn =singleton::singleton($username,$password);
-    //echo $conn->increment();
-    //echo $conn->increment();
-    //new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
+    $conn= singleton::singleton($username, $password);
     $this->dbObj = $conn->recipe;
     }
     Function setCollectionObj($colName) 
@@ -82,6 +81,7 @@ class DBLayer
     }
     
 }
+/*SingleTon design Pattern Implementation*/
 class singleton
 {
     private static $instance;
@@ -92,13 +92,8 @@ class singleton
     public static function singleton($username,$password)
     {
     if (!(self::$instance)) {
-    echo 'Creating new instance.';
     $className = __CLASS__;
     self::$instance = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));;
-    }
-    else
-    {
-        echo 'Same instance';
     }
     return self::$instance;
     }

@@ -23,10 +23,10 @@ function prepare_array() {
 /*Hardcoded Temp*/
 //$obj['name'] = "First Recipe ";//$this->name->value;
 //
- $obj['name'] = "First Recipe";
-    $obj['url'] = "www.MyOwnRecipe.Com/EggOmlete";
-    $obj['image'] = "EggOmlete.Jpg";
-    $obj['description'] = "This is first Recipe from Nirav.";
+    $obj['name'] = $_POST["RecipeName"];//"First Recipe";
+    $obj['url'] =$_POST["URLName"];// "www.MyOwnRecipe.Com/EggOmlete";
+    $obj['image'] = $_POST["ImageName"];//"EggOmlete.Jpg";
+    $obj['description'] =$_POST["Description"];/// "This is first Recipe from Nirav.";
     return $obj;
 //$obj = array( "about" => "Recipe system 1.0", "author" => "Nirav Patel");
 //    $salaries["Bob"] = 2000;

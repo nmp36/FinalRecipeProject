@@ -21,13 +21,13 @@ function CreativeWork() {
 function prepare_array_Creativework() 
 {
     /*Hardcoded Temp*/
-    $obj['about'] = "Recipe system 1.0";
-    $obj['author'] = "Nirav Patel";
+    $obj['about'] =$_POST["About"];// "Recipe system 1.0";
+    $obj['author'] = $_POST["Author"];///"Nirav Patel";
     return $obj;
 }
 function setaboutValue($var) 
 {
-    $this->name->value = $var;
+    $this->about->value = $var;
 }
 
 function getaboutValue() 
@@ -57,10 +57,6 @@ function getaboutAttributes() {
 return $this->about->tag->attributes;
 
 }
-
-
-
-
 function setauthorValue($var) 
 {
     $this->author->value = $var;
@@ -125,6 +121,7 @@ public function SearchCreativeWork()
 {
 $dbl=new DBLayer();
 $dbl->setCollectionObj($this->CretiveColname);
+
 $cursor = $dbl->get_CollectionObject($this->CretiveColname,$this->objID);
 foreach ($cursor as $arr) 
 {
