@@ -6,7 +6,6 @@
 <title>Schema Creator</title>
 </head>
 <?php
-$message=NULL;
 function __autoload($class_name) {
 include $class_name . '.php';
 }
@@ -17,31 +16,25 @@ if (empty($_POST["RecipeName"]) && empty($_POST["Description"]) && empty($_POST[
 else
 {
 $thing=new Recipe();
-$result=$thing->SearchThing("name", $_POST["RecipeName"]);
-if($result==1)
-{
- echo $thing->SearchCreativeWork();
- echo $thing->SearchRecipeWork(); 
-}
-else
-{
-  $message="Recipe does not exist";
-}
+echo $thing->SearchThing("name", $_POST["RecipeName"]);
+echo $thing->SearchCreativeWork();
+echo $thing->SearchRecipeWork();
 }
 ?>
 
 <body>
 <div style="border-style: outset; width: 450px" align="left">
 <h2 style="color: red" align="center">Welcome to Recipe System</h2>
-<h4 align="center"><label id=questionLabel ><? echo $message; ?></label></h4>
 <table width="400" border="0">
 <tr align="center">
 <td align="right"><strong>Name :</strong></td>
-<td align="left"><input id="recipeID" type="text" name="RecipeName" /></td>
+<td align="left"><input id="recipeID" type="text" name="RecipeName" />
+</td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Description:</strong></td>
-<td align="left"><input id="descid" type="text" name="Description" /></td>
+<td align="left"><input id="descid" type="text" name="Description" />
+</td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Image :</strong></td>
@@ -51,9 +44,13 @@ else
 <td align="right"><strong>URL:</strong></td>
 <td align="left"><input id="URLID" type="text" name="URLName" /></td>
 </tr>
-<tr align="center" >
-<td  colspan="3"><input type="submit" name="Check" title="Check" value="Search Recipe"/>
-    <h4><a href='Add.php'>Add</a></h4><h4><a href='UpdateRecipe.php'>Update</a></h4><h4><a href='DeleteRecipe.php'>Delete</a></h4></td>
+<tr align="center">
+<td colspan="2"><input type="submit" name="Check" title="Check"
+value="Search Recipe" />
+<h4>
+<a href='AddRecipe.php'>Add Recipe</a>
+</h4>
+</td>
 </tr>
 </table>
 </div>

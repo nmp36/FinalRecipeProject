@@ -1,10 +1,10 @@
 <?php
 
 /**
-This class provides details of Recipe.Extracts information from other two classes.Thing and Creative work and 
- * Display all relevant information for recipe.
- * @author Dishna
- */
+This class provides details of Recipe.Extracts information from other two classes.Thing and Creative work and
+* Display all relevant information for recipe.
+* @author Dishna
+*/
 class Recipe Extends CreativeWork
 {
 Public $RecipeColname="RecipeWork";
@@ -18,61 +18,61 @@ function Recipe() {
     $this->setinstructionsAttributes('instructions');
     $this->setingredientsAttributes('ingredients');
 }
-function prepare_array_Recipework() 
+function prepare_array_Recipework()
 {
     $obj['instructions'] =$_POST["Instructions"];
     $obj['ingredients'] = $_POST["Ingredients"];
     return $obj;
 }
-function setinstructionsValue($var) 
+function setinstructionsValue($var)
 {
     $this->instructions->value = $var;
 }
-function getinstructionsValue() 
+function getinstructionsValue()
 {
     return $this->instructions->value;
 }
-function setinstructionsTag($var) 
+function setinstructionsTag($var)
 {
     $this->instructions->tag->tagtype = $var;
 }
-function getinstructionsTag() 
+function getinstructionsTag()
 {
  return $this->instructions->tag->tagtype ;
 }
-function setinstructionsAttributes($var) 
+function setinstructionsAttributes($var)
 {
 $class = get_class($this) . ' instructions ' . $var;
 $this->instructions->tag->attributes['class'] = $class;
 $this->instructions->tag->attributes['itemprop'] = 'instructions';
 }
-function getinstructionsAttributes() 
+function getinstructionsAttributes()
 {
 return $this->instructions->tag->attributes;
 }
-function setingredientsValue($var) 
+function setingredientsValue($var)
 {
     $this->ingredients->value = $var;
 }
-function getingredientsValue() 
+function getingredientsValue()
 {
     return $this->ingredients->value;
 }
-function setingredientsTag($var) 
+function setingredientsTag($var)
 {
     $this->ingredients->tag->tagtype = $var;
 }
-function getingredientsTag() 
+function getingredientsTag()
 {
  return $this->ingredients->tag->tagtype ;
 }
-function setingredientsAttributes($var) 
+function setingredientsAttributes($var)
 {
 $class = get_class($this) . ' ingredients ' . $var;
 $this->ingredients->tag->attributes['class'] = $class;
 $this->ingredients->tag->attributes['itemprop'] = 'ingredients';
 }
-function getingredientsAttributes() 
+function getingredientsAttributes()
 {
 return $this->ingredients->tag->attributes;
 }
@@ -84,14 +84,14 @@ $dbl->setCollectionObj($this->RecipeColname);
 $obj=$this->prepare_array_Recipework();
 $dbl->InsertCollection($obj,$this->objID);
 $cursor = $dbl->get_CollectionObject($this->RecipeColname,$this->objID);
-foreach ($cursor as $arr) 
+foreach ($cursor as $arr)
 {
 $this->instructions->value = $arr['instructions'];
 $this->ingredients->value = $arr['ingredients'];
 }
 
 echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
-echo "<b>Ingredients</b>  : ". $this->printingredientsHtmlTag().'<br>';
+echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
 }
 private function printinstructionsHtmlTag()
 {
@@ -108,14 +108,63 @@ public function SearchRecipeWork()
 $dbl=new DBLayer();
 $dbl->setCollectionObj($this->RecipeColname);
 $cursor = $dbl->get_CollectionObject($this->RecipeColname,$this->objID);
-foreach ($cursor as $arr) 
+foreach ($cursor as $arr)
 {
 $this->instructions->value = $arr['instructions'];
 $this->ingredients->value = $arr['ingredients'];
 }
 echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
-echo "<b>Ingredients</b>  : ". $this->printingredientsHtmlTag().'<br>';
+echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
+}
+public function UpdateRecipe($_criteria, $_newData)
+{
+
+$dbl=new DBLayer();
+$dbl->setCollectionObj($this->Colname);
+$this->objID=$dbl->UpdateCollection($this->Colname, $_criteria, $_newData);
+$cursor = $dbl->get_CollectionObjectbyid($this->Colname,$this->objID);
+foreach ($cursor as $arr)
+{
+$this->instructions->value = $arr['instructions'];
+$this->ingredients->value = $arr['ingredients'];
+}
+echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
+echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
+}
+
+public function RemoveRecipe($_criteria)
+{
+
+$dbl=new DBLayer();
+$dbl->setCollectionObj($this->Colname);
+$this->objID=$dbl->RemoveCollection($this->Colname, $_criteria);
+$cursor = $dbl->get_CollectionObjectbyid($this->Colname,$this->objID);
+foreach ($cursor as $arr)
+{
+$this->instructions->value = $arr['instructions'];
+$this->ingredients->value = $arr['ingredients'];
+}
+echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
+echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
+}
+
+public function saveRecipeWork()
+{
+$dbl=new DBLayer();
+$dbl->setCollectionObj($this->RecipeColname);
+$obj=$this->prepare_array_Recipework();
+$dbl->SaveCollection($obj,$this->objID);
+$cursor = $dbl->get_CollectionObject($this->RecipeColname,$this->objID);
+foreach ($cursor as $arr)
+{
+$this->instructions->value = $arr['instructions'];
+$this->ingredients->value = $arr['ingredients'];
+}
+
+echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
+echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
 }
 
 }
 ?>
+

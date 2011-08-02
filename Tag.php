@@ -18,18 +18,19 @@ var $logfile = "errorLog.txt";
 
 /*Automatically creates the tag based on the given parameters*/
 function __construct($tagType, $tagAttributes, $tagContent){
-if (! empty($tagType) || !empty($tagAttributes) || !empty($tagContent))
-{
+//if (! empty($tagType) || !empty($tagAttributes) || !empty($tagContent))
+//{
 $this->type = $tagType;
 $this->attributes = $tagAttributes;
 $this->content = $tagContent;
 
 $this->set_tag($tagType, $tagAttributes, $tagContent);
-}
+//}
 }
 
 /*The function that actually creates the tag. Uses a validator to make sure that the type of tag is supported*/
 function set_tag($tagType, $tagAttributes, $tagContent){
+$tagAttributesOutput;
 if((strlen($tagType)==0 || strlen($tagContent) == 0)){
 return '';
 }
@@ -43,7 +44,7 @@ $tagOutput = "<".$tagType;
 
 /*Creates the section for the attributes*/
 foreach($tagAttributes as $key => $value){
-$this->tagAttributesOutput .= " ".$key."=&#039".$value."&#039";
+$this->tagAttributesOutput .= " ".$key.'='."'".$value."'";
 }
 //echo $this->tagAttributesOutput;
 

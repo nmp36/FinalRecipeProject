@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<form action="Add.php" method="post" >
+<form action="AddRecipe.php" method="post" >
 <title>Schema Creator</title>
 </head>
 <?php
@@ -28,21 +28,25 @@ echo 'Recipe Saved Successfully.';
 }
 ?>
 <body>
-<div style="border-style:outset; width: 450px" align="left">
-<h2 align="center" style="color:red">Add Recipe</h2>
-<h5 style="color: red"><h5>
+<div style="border-style: outset; width: 450px" align="left">
+<h2 align="center" style="color: red">Add Recipe</h2>
+<h5 style="color: red">
+<h5>
 <table width="400" border="0">
-<tr >
+<tr>
 <td align="right"><strong>Name :</strong></td>
-<td align="left"><input id="recipeID" type="text" name="RecipeName" /></td>
+<td align="left"><input id="recipeID" type="text"
+name="RecipeName" /></td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Description:</strong></td>
-<td align="left"><input id="descid" type="text" name="Description" /></td>
+<td align="left"><input id="descid" type="text" name="Description" />
+</td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Image :</strong></td>
-<td align="left"><input id="imgid" type="text" name="ImageName" /></td>
+<td align="left"><input id="imgid" type="text" name="ImageName" />
+</td>
 </tr>
 <tr align="center">
 <td align="right"><strong>URL:</strong></td>
@@ -54,18 +58,22 @@ echo 'Recipe Saved Successfully.';
 </tr>
 <tr align="center">
 <td align="right"><strong>Author:</strong></td>
-<td align="left"><input id="AuthorID" type="text" name="Author" /></td>
+<td align="left"><input id="AuthorID" type="text" name="Author" />
+</td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Ingredients:</strong></td>
-<td align="left"><input id="ingrenID" type="text" name="Ingredients" /></td>
+<td align="left"><input id="ingrenID" type="text"
+name="Ingredients" /></td>
 </tr>
 <tr align="center">
 <td align="right"><strong>Instructions:</strong></td>
-<td align="left"><input id="instructID" type="text" name="Instructions" /></td>
+<td align="left"><input id="instructID" type="text"
+name="Instructions" /></td>
 </tr>
-<tr align="left" >
-<td colspan="2" align="center"><input type="submit" name="Check" title="Check" value="Save Recipe"/><h4><a href='index.php'>Home</a></h4></td>
+<tr align="left">
+<td colspan="2" align="center"><input type="submit" name="Check"
+title="Check" value="Save Recipe" /><h4><a href='FindRecipe.php'>Search Recipe</a></h4></td>
 </tr>
 </table>
 </div>

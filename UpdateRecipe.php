@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<form action="Add.php" method="post" >
+<form action="UpdateRecipe.php" method="post" />
 <title>Schema Creator</title>
 </head>
 <?php
@@ -15,21 +15,16 @@ if (empty($_POST["RecipeName"]) && empty($_POST["Description"]) && empty($_POST[
  }
 else
 {
-$thing=new Recipe();
-/*
-echo $thing->PrintThing();
-echo $thing->PrintCreativeWork();
-echo $thing->PrintRecipeWork();
-*/
-echo $thing->saveThing();
-echo $thing->saveCreativeWork();
-echo $thing->saveRecipeWork();
-echo 'Recipe Saved Successfully.';
+$thing=new Recipe('' ,'',''); //As Thing, the super parent class extends Tag. Tag construtor is invoked.
+echo $thing->UpdateThing("name", $_POST["RecipeName"]);
+//echo $thing->UpdateCreativeWork();
+//echo $thing->UpdateRecipe();
+echo 'Recipe Updated Successfully.';
 }
 ?>
 <body>
 <div style="border-style:outset; width: 450px" align="left">
-<h2 align="center" style="color:red">Add Recipe</h2>
+<h2 align="center" style="color:red">Update Recipe</h2>
 <h5 style="color: red"><h5>
 <table width="400" border="0">
 <tr >
@@ -56,7 +51,6 @@ echo 'Recipe Saved Successfully.';
 <td align="right"><strong>Author:</strong></td>
 <td align="left"><input id="AuthorID" type="text" name="Author" /></td>
 </tr>
-<tr align="center">
 <td align="right"><strong>Ingredients:</strong></td>
 <td align="left"><input id="ingrenID" type="text" name="Ingredients" /></td>
 </tr>
@@ -64,8 +58,10 @@ echo 'Recipe Saved Successfully.';
 <td align="right"><strong>Instructions:</strong></td>
 <td align="left"><input id="instructID" type="text" name="Instructions" /></td>
 </tr>
-<tr align="left" >
-<td colspan="2" align="center"><input type="submit" name="Check" title="Check" value="Save Recipe"/><h4><a href='index.php'>Home</a></h4></td>
+<tr align="left">
+<td colspan="2" align="center"><input type="submit" name="Check"
+title="Check" value="Update Recipe" ><h4><a href='index.php'>Home</a></h4></td>
+</td>
 </tr>
 </table>
 </div>
