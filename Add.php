@@ -16,13 +16,15 @@ if (empty($_POST["RecipeName"]) && empty($_POST["Description"]) && empty($_POST[
 else
 {
 $thing=new Recipe();
+//Create nested array
+//echo $thing->CreateRecipeArray();
 /*
 echo $thing->PrintThing();
 echo $thing->PrintCreativeWork();
 echo $thing->PrintRecipeWork();
 */
-echo $thing->saveThing();
-echo $thing->saveCreativeWork();
+//echo $thing->saveThing();
+//echo $thing->saveCreativeWork();
 echo $thing->saveRecipeWork();
 echo 'Recipe Saved Successfully.';
 }

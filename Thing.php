@@ -24,7 +24,7 @@ $obj = $this->prepare_array();
 $collection->insert($obj);
 }
 //gets a thing array to pass to mongo, it will error if you just pass in a $this because it can't access the private variables;
-function prepare_array() {
+Public function prepare_array() {
 /*Hardcoded Temp*/
     $obj['name'] = $_POST["RecipeName"];
     $obj['url'] =$_POST["URLName"];

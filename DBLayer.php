@@ -60,8 +60,36 @@ class DBLayer
      {
      $obj['_id']=$id;
      }
-     $this->Collect->insert($obj);
-     return $obj['_id'];
+    echo $obj["Thing"] ;
+    $Recipe=$obj["Recipe"];
+    $RecipeCollection=$this->dbObj->selectCollection("RecipeTest");
+    $RecipeCollection->Insert($Recipe);
+    //echo $Recipe['_id'].'\n';
+
+    $RecipeRef = MongoDBRef::create($RecipeCollection->getName(),$Recipe['_id']);
+
+    $CreativeWork=$obj["CreativeWork"];
+    $CreativeWork["RecipeReference"]=$RecipeRef;
+
+    $CreativeWorkCollection=$this->dbObj->selectCollection("CreativeWorkTest");
+    $CreativeWorkCollection->Insert($CreativeWork);
+    //echo $CreativeWork['_id'];
+
+    $CreativeWrokRef = MongoDBRef::create($CreativeWorkCollection->getName(), $CreativeWork['_id']);
+
+    $thing=$obj["Thing"];
+    $thing["CreativeWorkRef"]=$CreativeWrokRef;
+    $thingCollection=$this->dbObj->selectCollection("Thingtest");
+    $thingCollection->Insert($thing);
+    //Back ref 
+    $recipeback=$this->dbObj->RecipeTest;
+    $RecipeResult = $recipeback->findOne(array("ingredients" => "suth"));
+    echo 'Result'.$RecipeResult['_id'];
+    print_r($RecipeResult);
+    $CWback=$this->dbObj->CreativeWorkTest;
+    //$CWbackResult = MongoDBRef::get($CWback->db, $RecipeResult['_id']);
+    $CWbackResult = $CWback->findOne(array("about" => "test1"));
+    print_r($CWbackResult);
     }
     //Update collection based on Criteria and New data.
     public function SaveCollection($obj,$id)

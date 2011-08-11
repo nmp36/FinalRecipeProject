@@ -10,6 +10,7 @@ class Recipe Extends CreativeWork
 Public $RecipeColname="RecipeWork";
 private $instructions;
 private $ingredients;
+Protected $RecipeArray;
 
 function Recipe() {
     parent::__construct();
@@ -139,11 +140,9 @@ $dbl=new DBLayer();
 $dbl->setCollectionObj($this->Colname);
 $this->objID=$dbl->RemoveCollection($this->Colname, $_criteria);
 $cursor = $dbl->get_CollectionObjectbyid($this->Colname,$this->objID);
-foreach ($cursor as $arr)
-{
+//var_(iterator_to_array($cursor));
 $this->instructions->value = $arr['instructions'];
 $this->ingredients->value = $arr['ingredients'];
-}
 echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
 echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
 }
@@ -152,17 +151,93 @@ public function saveRecipeWork()
 {
 $dbl=new DBLayer();
 $dbl->setCollectionObj($this->RecipeColname);
-$obj=$this->prepare_array_Recipework();
-$dbl->SaveCollection($obj,$this->objID);
-$cursor = $dbl->get_CollectionObject($this->RecipeColname,$this->objID);
-foreach ($cursor as $arr)
-{
-$this->instructions->value = $arr['instructions'];
-$this->ingredients->value = $arr['ingredients'];
-}
+$obj=$this->CreateRecipeArray();//prepare_array_Recipework();
+$dbl->InsertCollection($obj,NULL);
+$cursor = $dbl->get_CollectionObject($this->RecipeColname);//,$this->objID);
+//if ($cursor->hasNext())
+//{
+//    echo 'data';
+//    foreach ($cursor as $arr)
+//    {
+//    foreach($arr as $key => $value)
+//    {
+//       //echo "\$arr[$key] => $value.\n";
+//                          if (is_array($value))
+//                             {
+//                               foreach ($value as $k => $v11)
+//                               {
+//                                 //echo "\$value[$k] => $v11.\n"; 
+//                                     if (is_array($v11))
+//                                     {
+//                                       foreach ($v11 as $k1 => $v1)
+//                                       {
+//                                         //echo "\$v11[$k1] => $v1.\n";  
+//                                       }
+//                                     }
+//                               }
+//                             } 
+//        
+//    }
+//}
+//
+//}
+//foreach ($cursor as $arr)
+//{
+//    echo 'test';
+//    foreach ($arr as $key => $value) {
+//                             echo "\$arr[$key] => $value.\n";
+//                             if (is_array($value))
+//                             {
+//                               foreach ($value as $k => $v11)
+//                               {
+//                                 echo "\$value[$k] => $v11.\n"; 
+//                                     if (is_array($v11))
+//                                     {
+//                                       foreach ($v11 as $k1 => $v1)
+//                                       {
+//                                         echo "\$v11[$k1] => $v1.\n";  
+//                                       }
+//                                     }
+//                               }
+//                             }
+//                             echo   $key;
+//                             echo   $value;
+//                             
+//                           }
+//$this->instructions->value = $arr['instructions'];
+//$this->ingredients->value = $arr['ingredients'];
+//}
 
-echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
-echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
+//echo "<b>Instructions</b> : " . $this->printinstructionsHtmlTag().'<br>';
+//echo "<b>Ingredients</b> : ". $this->printingredientsHtmlTag().'<br>';
+}
+Public function CreateRecipeArray()
+{
+    //Approach 1
+    ////Create nested Array of Thing ,CreativeWork and Recipe into One.
+//     $this->RecipeArray=array(
+//            "name"=>$_POST["RecipeName"],
+//            "url"=>$_POST["URLName"],
+//            "image"=>$_POST["ImageName"],
+//            "description"=>$_POST["Description"],
+//            "CreativeWork"=>array(
+//                "about"=>$_POST["About"],
+//                "author"=>$_POST["Author"],
+//                "Recipe"=>array(
+//                     'instructions'=>$_POST["Instructions"],
+//                     'ingredients'=>$_POST["Ingredients"]
+//                                )
+//                               )
+//                           );
+//     
+     //Approach 2
+     //Prepare Array and put it.Rather listing here.
+     $this->RecipeArray=array(
+         "Thing"=>$this->prepare_array(),
+         "CreativeWork"=>$this->prepare_array_Creativework(),
+         "Recipe"=>$this->prepare_array_Recipework()
+             );
+    return $this->RecipeArray;
 }
 
 }
